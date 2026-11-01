@@ -1,7 +1,7 @@
 /*
   Mico Mrkaic, September 2025
 
- * IceBurger Tetris — C + SDL2
+ * IceBurger — C + SDL2
  * Blocks are made of 🍦 and 🍔 tiles drawn procedurally; clearing lines throws food everywhere.
  * Score is counted in calories.
  *
@@ -25,7 +25,7 @@
  * Bonuses:
  *   All-burger row   "Combo Meal"    row worth double
  *   All-ice row      "Brain Freeze"  gravity halved for 5 s
- *   Four lines       "Happy Meal"    x2 calories, a burp and a screen shake
+ *   Four lines       "Food Fight"    x2 calories, a burp and a screen shake
  */
 
 #include <SDL.h>
@@ -190,7 +190,7 @@ static void dispatch_events(App *a){
       case EV_CLEAR:
         if(e->a == 4){
           audio_play(SFX_BURP);
-          banner(a, "HAPPY MEAL!", "4 LINES  x2 KCAL", col_accent, 3, 1.8f);
+          banner(a, "FOOD FIGHT!", "4 LINES  x2 KCAL", col_accent, 3, 1.8f);
           shake(a, 10.0f, 0.55f);
         } else audio_play(e->a == 1 ? SFX_CLEAR1 : e->a == 2 ? SFX_CLEAR2 : SFX_CLEAR3);
         break;
@@ -594,7 +594,7 @@ int main(int argc, char **argv){
 #else
   Uint32 wflags = SDL_WINDOW_SHOWN | SDL_WINDOW_ALLOW_HIGHDPI | SDL_WINDOW_RESIZABLE;
 #endif
-  a->win = SDL_CreateWindow("IceBurger Tetris", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WIN_W, WIN_H, wflags);
+  a->win = SDL_CreateWindow("IceBurger", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WIN_W, WIN_H, wflags);
   if(!a->win){ fprintf(stderr, "SDL_CreateWindow error: %s\n", SDL_GetError()); SDL_Quit(); return 1; }
 
   a->ren = SDL_CreateRenderer(a->win, -1, SDL_RENDERER_ACCELERATED|SDL_RENDERER_PRESENTVSYNC);

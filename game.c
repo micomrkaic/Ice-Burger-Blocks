@@ -1,5 +1,5 @@
 /*
- * IceBurger Tetris — game rules (no SDL; testable headless)
+ * IceBurger — game rules (no SDL; testable headless)
  * Mico Mrkaic, 2025
  */
 #include "game.h"
@@ -169,7 +169,7 @@ static void clear_lines(Game *g){
   }
   if(!cleared) return;
 
-  static const int mult4[5] = {0, 4, 5, 6, 8}; // x1, x1.25, x1.5, x2 (Happy Meal)
+  static const int mult4[5] = {0, 4, 5, 6, 8}; // x1, x1.25, x1.5, x2 (Food Fight)
   g->kcal += kcal * mult4[cleared] / 4;
   emit(g, EV_CLEAR, cleared);
   if(combo)  emit(g, EV_COMBO_MEAL, combo);

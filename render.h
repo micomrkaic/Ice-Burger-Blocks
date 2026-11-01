@@ -1,5 +1,5 @@
 /*
- * IceBurger Tetris — procedural renderer: one batched SDL_RenderGeometry call per flush,
+ * IceBurger — procedural renderer: one batched SDL_RenderGeometry call per flush,
  * food tiles drawn from triangles, 8x8 bitmap text, themed particles.
  * Mico Mrkaic, 2025
  */

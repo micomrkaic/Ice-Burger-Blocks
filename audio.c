@@ -1,5 +1,5 @@
 /*
- * IceBurger Tetris — synthesized sound effects
+ * IceBurger — synthesized sound effects
  * Mico Mrkaic, 2025
  */
 #include "audio.h"
@@ -84,7 +84,7 @@ static void build_sfx(void){
   { const float n[] = {C5, E5, G5};      b = &sfx[SFX_CLEAR2]; *b = buf_new(0.32f); notes(b, 0, n, 3, 0.07f, W_SQUARE, 0.10f); }
   { const float n[] = {C5, E5, G5, C6};  b = &sfx[SFX_CLEAR3]; *b = buf_new(0.40f); notes(b, 0, n, 4, 0.07f, W_SQUARE, 0.10f); }
 
-  // Happy Meal: quick fanfare, then a pitch-bent, rattling burp
+  // Food Fight: quick fanfare, then a pitch-bent, rattling burp
   { const float n[] = {C5, E5, G5, C6};
     b = &sfx[SFX_BURP]; *b = buf_new(1.05f);
     notes(b, 0, n, 4, 0.05f, W_SQUARE, 0.09f);

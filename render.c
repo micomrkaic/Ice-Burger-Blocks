@@ -1,5 +1,5 @@
 /*
- * IceBurger Tetris — procedural renderer
+ * IceBurger — procedural renderer
  * Mico Mrkaic, 2025
  */
 #include "render.h"
@@ -14,7 +14,7 @@
 #endif
 
 #if !SDL_VERSION_ATLEAST(2,0,18)
-#error "IceBurger Tetris needs SDL 2.0.18 or newer (SDL_RenderGeometry)"
+#error "IceBurger needs SDL 2.0.18 or newer (SDL_RenderGeometry)"
 #endif
 
 // ---------- Batch ----------

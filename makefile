@@ -1,6 +1,6 @@
 # ===== Config =====
 # Output name (change if you like)
-APP ?= tetris
+APP ?= iceburger
 SRCS := main.c game.c render.c audio.c
 HDRS := game.h render.h audio.h font8x8.h
 
@@ -51,7 +51,7 @@ PREFIX ?= $(HOME)/.local
 BINDIR ?= $(PREFIX)/bin
 MANDIR ?= $(PREFIX)/share/man
 MAN6DIR := $(MANDIR)/man6
-MANPAGE := tetris.6
+MANPAGE := iceburger.6
 INSTALL ?= install
 
 # Rules tests: game.c only, no SDL

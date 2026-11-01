@@ -136,7 +136,7 @@ static void test_clears_and_bonuses(void){
   game_hard_drop(&g);
   CHECK(has_event(&g, EV_BRAIN_FREEZE, NULL)); CHECK(g.freeze_timer == FREEZE_S);
 
-  // Happy Meal (4 lines) uses the x2 multiplier; rows reported at their pre-clear positions
+  // Food Fight (4 lines) uses the x2 multiplier; rows reported at their pre-clear positions
   clear_board(&g); game_clear_events(&g);
   for(int r=ROWS-4;r<ROWS;r++){ fill_row(&g, r, FOOD_ICE, 0); g.board[r][5].food = FOOD_BURGER; }
   set_cur(&g, PK_I, FOOD_ICE); game_rotate(&g, true); while(game_move(&g, -1)) {}

@@ -1,5 +1,5 @@
 /*
- * IceBurger Tetris — game rules (no SDL; testable headless)
+ * IceBurger — game rules (no SDL; testable headless)
  * Mico Mrkaic, 2025
  */
 #ifndef GAME_H
