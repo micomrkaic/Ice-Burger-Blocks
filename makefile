@@ -44,6 +44,16 @@ DEBUG_CFLAGS := -g -O0 $(WARN) $(CSTD) $(SDL_CFLAGS)
 ASAN_FLAGS   := -fsanitize=address,undefined -fno-omit-frame-pointer
 ASAN_CFLAGS  := -g -O0 $(ASAN_FLAGS) $(WARN) $(CSTD) $(SDL_CFLAGS)
 
+# Per-user install: binary in ~/.local/bin, man page in ~/.local/share/man/man6.
+# man-db finds ~/.local/share/man automatically when ~/.local/bin is on PATH.
+# Override for a system install, e.g.  sudo make install PREFIX=/usr/local
+PREFIX ?= $(HOME)/.local
+BINDIR ?= $(PREFIX)/bin
+MANDIR ?= $(PREFIX)/share/man
+MAN6DIR := $(MANDIR)/man6
+MANPAGE := tetris.6
+INSTALL ?= install
+
 # Rules tests: game.c only, no SDL
 TEST_BIN := tests/test_game
 
@@ -53,7 +63,7 @@ WEB_DIR := web
 EMFLAGS := -O2 $(CSTD) -sUSE_SDL=2 -sALLOW_MEMORY_GROWTH=1 -sMINIFY_HTML=0 --shell-file shell.html
 
 # ===== Targets =====
-.PHONY: all run clean debug sanitize test wasm serve
+.PHONY: all run clean debug sanitize test wasm serve install uninstall man
 
 all: $(APP)
 
@@ -90,6 +100,19 @@ $(WEB_DIR)/index.html: $(SRCS) $(HDRS) shell.html
 # Browsers won't load .wasm from file://, so serve the folder locally
 serve: wasm
 	cd $(WEB_DIR) && python3 -m http.server 8000
+
+install: $(APP) $(MANPAGE)
+	$(INSTALL) -d $(DESTDIR)$(BINDIR) $(DESTDIR)$(MAN6DIR)
+	$(INSTALL) -m 755 $(APP) $(DESTDIR)$(BINDIR)/$(APP)
+	$(INSTALL) -m 644 $(MANPAGE) $(DESTDIR)$(MAN6DIR)/$(APP).6
+	@case ":$$PATH:" in *":$(BINDIR):"*) ;; *) echo "Note: $(BINDIR) is not on your PATH";; esac
+
+uninstall:
+	$(RM) $(DESTDIR)$(BINDIR)/$(APP) $(DESTDIR)$(MAN6DIR)/$(APP).6
+
+# Preview the man page without installing
+man:
+	man ./$(MANPAGE)
 
 clean:
 	$(RM) $(APP) $(DEBUG_APP) $(ASAN_APP) $(TEST_BIN) *.o

@@ -1,0 +1,157 @@
+.\" IceBurger Tetris manual page
+.\" View without installing: man ./tetris.6
+.TH TETRIS 6 "2026-10-31" "IceBurger Tetris" "Games Manual"
+.nh
+.SH NAME
+tetris \- IceBurger Tetris, a falling-blocks game made of ice cream and burgers
+.SH SYNOPSIS
+.B tetris
+.SH DESCRIPTION
+.B tetris
+is a falling-blocks puzzle game built with SDL2.
+Every block is a soft-serve cone or a burger, the score is counted in
+calories, and cleared lines spray food across the screen.
+.PP
+Pieces rotate under the Super Rotation System (SRS) with its standard wall
+kicks, are dealt from a shuffled bag of all seven shapes, and can be held
+once per turn.
+A grounded piece may slide for
+.B 0.5
+seconds before it locks; each successful move or rotation restarts that
+timer, up to 15 times per piece.
+A ghost outline shows where the current piece will land, and the next five
+pieces are shown on the right.
+.PP
+The window can be resized freely; the picture scales and stays sharp on
+high-DPI displays.
+The game pauses itself when the window loses focus.
+.PP
+There are no command-line options.
+.SH CONTROLS
+.SS Keyboard
+.TP 14
+.B Left, Right
+Move.
+Holding a key auto-repeats after 170\~ms, then every 50\~ms.
+.TP
+.B Down
+Soft drop (repeats while held).
+.TP
+.B Space
+Hard drop: fall straight down and lock.
+.TP
+.B Up, X
+Rotate clockwise.
+.TP
+.B Z
+Rotate counter-clockwise.
+.TP
+.B C, Shift
+Hold the current piece, or swap it with the held one.
+.TP
+.B P, F1
+Pause or resume.
+.TP
+.B R
+Start a new game.
+.TP
+.B M
+Mute or unmute sound.
+.TP
+.B Esc
+Quit.
+.SS Gamepad
+Any controller SDL recognises is picked up when it is connected.
+.TP 14
+.B D-pad, left stick
+Move left or right; down soft-drops.
+.TP
+.B D-pad up
+Hard drop.
+.TP
+.B A
+Rotate clockwise.
+.TP
+.B B
+Rotate counter-clockwise.
+.TP
+.B X, Y, shoulders
+Hold.
+.TP
+.B Start
+Pause or resume.
+.TP
+.B Back
+Start a new game.
+.SH SCORING
+Each cleared cell is worth 550\~kcal if it is a burger and 250\~kcal if it is
+an ice cream.
+The total for a clear is then multiplied by the number of lines cleared at
+once:
+.RS
+.nf
+.ta 10n
+1 line	\(mu1
+2 lines	\(mu1.25
+3 lines	\(mu1.5
+4 lines	\(mu2
+.fi
+.RE
+.PP
+A soft drop adds 1\~kcal per row and a hard drop 2\~kcal per row.
+The level rises every 10 lines.
+Pieces fall one row every 900\~ms at level 0, 70\~ms faster per level, and
+never faster than every 90\~ms.
+.SH BONUSES
+.TP 14
+.B Combo Meal
+A cleared row made entirely of burgers is worth double.
+.TP
+.B Brain Freeze
+A cleared row made entirely of ice cream halves the falling speed for
+5 seconds.
+.TP
+.B Happy Meal
+Clearing four lines at once earns the \(mu2 multiplier, a burp and a
+screen shake.
+.SH LEVELS
+The level names follow the meal:
+.B SALAD
+(levels 0\(en2),
+.B SNACK
+(3\(en5),
+.B DRIVE-THRU
+(6\(en8) and
+.B FOOD COMA
+(9 and above).
+.SH FILES
+.TP
+.I $XDG_DATA_HOME/iceburger/highscores.txt
+The five best scores, one per line, highest first.
+When
+.B XDG_DATA_HOME
+is unset this is
+.IR ~/.local/share/iceburger/highscores.txt .
+On macOS it is
+.IR "~/Library/Application Support/iceburger/highscores.txt" .
+Delete the file to reset the table.
+.SH ENVIRONMENT
+.TP
+.B XDG_DATA_HOME
+Where the high-score directory is created (Linux and other Unix systems).
+.TP
+.B SDL_AUDIODRIVER, SDL_VIDEODRIVER
+Standard SDL2 variables for choosing the audio and video back ends.
+If no audio device can be opened the game runs silently.
+.SH EXIT STATUS
+0 on a normal quit; 1 if SDL, the window or the renderer cannot be
+initialised, or memory runs out at start-up.
+.SH AUTHORS
+Mico Mrkaic.
+The 8\(mu8 bitmap font is font8x8 by Daniel Hepper, in the public domain,
+based on the public-domain IBM VGA fonts.
+.SH COPYRIGHT
+Released under the GNU General Public License, version 3.
+See the
+.I LICENSE
+file in the source distribution.
