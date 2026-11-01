@@ -53,3 +53,8 @@ dkms.conf
 
 # debug information files
 *.dwo
+tetris
+tetris-debug
+tetris-asan
+tests/test_game
+web/

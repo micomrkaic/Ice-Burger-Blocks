@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IceBurger Tetris</title>
+<style>
+  html, body { margin: 0; height: 100%; background: #14181c; color: #ebebeb;
+               font: 14px/1.4 ui-monospace, Menlo, Consolas, monospace; }
+  main { min-height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; padding: 12px; box-sizing: border-box; }
+  canvas { display: block; outline: none; }
+  #status { color: #8c96a0; }
+</style>
+</head>
+<body>
+<main>
+  <canvas id="canvas" width="720" height="760" tabindex="-1" oncontextmenu="event.preventDefault()"></canvas>
+  <div id="status">Loading…</div>
+</main>
+<script>
+  var Module = {
+    canvas: document.getElementById('canvas'),
+    setStatus: function (s) { document.getElementById('status').textContent = s || 'Click the game, then play. Sound starts after your first key press.'; },
+    print: function (t) { console.log(t); },
+    printErr: function (t) { console.warn(t); }
+  };
+  Module.setStatus('Loading…');
+  window.addEventListener('keydown', function (e) {
+    // keep arrows and space from scrolling the page
+    if ([32, 37, 38, 39, 40].indexOf(e.keyCode) >= 0) e.preventDefault();
+  }, { passive: false });
+</script>
+{{{ SCRIPT }}}
+</body>
+</html>
